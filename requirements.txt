@@ -1,0 +1,9 @@
+mysql-connector-python
+pandas
+scikit-learn
+numpy
+imblearn
+configparser
+joblib
+matplotlib
+scipy
