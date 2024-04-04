@@ -3,7 +3,8 @@ from imblearn.over_sampling import SMOTE
 from imblearn.under_sampling import RandomUnderSampler, ClusterCentroids, NearMiss
 from sklearn.svm import SVR
 from sklearn.preprocessing import MinMaxScaler
-# from configs import BALANCE_DATASET_STRATEGY
+#import configs
+from configs import BALANCE_DATASET_STRATEGY
 #from configs import N_CV_FEATURE_REDUCTION
 #from utils.log import log
 
@@ -72,7 +73,7 @@ def perform_balancing(x, y, strategy=None):
     """
 
     if strategy is None:
-        raise Exception("still don't have a strategy?")         #set at random right now. BALANCE_DATASET_STRATEGY
+        strategy = BALANCE_DATASET_STRATEGY # raise Exception("still don't have a strategy?")         #set at random right now. BALANCE_DATASET_STRATEGY
 
     if strategy == 'random':
         rus = RandomUnderSampler(random_state=42)
@@ -89,3 +90,5 @@ def perform_balancing(x, y, strategy=None):
     new_x = pd.DataFrame(new_x, columns=x.columns)
     new_y = pd.DataFrame(new_y, columns=[y.name])
     return new_x, new_y
+
+print()
