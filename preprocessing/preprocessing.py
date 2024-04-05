@@ -36,7 +36,28 @@ def get_labelled_instances(scaler= None, allowed_features= None, is_training_dat
     
     print(refactored_df.info())
     print(refactored_df.describe())
+    
+    print(non_refactored_df.info())
+    print(non_refactored_df.describe())
+    
+    # drop the columns with all NaN values in them.
+    refactored_df.dropna(axis=1, how='all', inplace=True)
+    
     print("nulls:--------------------------------")
     print(Counter(refactored_df.isnull().sum()))
+    print(Counter(non_refactored_df.isnull().sum()))
+    
+    # dropping all the columns which are not numeric.
+    refactored_df = refactored_df.select_dtypes(include=['number'])
+    non_refactored_df = non_refactored_df.select_dtypes(include=['number'])
+    
+    # Replace null values with median
+    refactored_df.fillna(refactored_df.median(), inplace=True)
+    non_refactored_df.fillna(non_refactored_df.median(), inplace=True)
+    
+    print(Counter(refactored_df.isnull().sum()))
+    print(Counter(non_refactored_df.isnull().sum()))
+    
+    
 
 get_labelled_instances(scaler= None, allowed_features= None, is_training_data= True)
