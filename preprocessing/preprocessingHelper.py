@@ -1,10 +1,14 @@
+import sys
+import os
+sys.path.append(os.getcwd())
+
+from configs import BALANCE_DATASET_STRATEGY
 import pandas as pd
 from imblearn.over_sampling import SMOTE
 from imblearn.under_sampling import RandomUnderSampler, ClusterCentroids, NearMiss
 from sklearn.svm import SVR
 from sklearn.preprocessing import MinMaxScaler
 #import configs
-from configs import BALANCE_DATASET_STRATEGY
 #from configs import N_CV_FEATURE_REDUCTION
 #from utils.log import log
 
@@ -90,5 +94,3 @@ def perform_balancing(x, y, strategy=None):
     new_x = pd.DataFrame(new_x, columns=x.columns)
     new_y = pd.DataFrame(new_y, columns=[y.name])
     return new_x, new_y
-
-print()
