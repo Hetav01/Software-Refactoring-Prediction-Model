@@ -9,7 +9,6 @@ from configs import SCALE_DATASET, TEST, FEATURE_REDUCTION, BALANCE_DATASET, DRO
 from preprocessingHelper import perform_fit_scaling, perform_scaling, perform_feature_reduction
 
 def get_labelled_instances(scaler= None, allowed_features= None, is_training_data: bool= True):
-    #print(f"---- Retrive labelled instances for: {df}")
     
     refactored_df = pd.read_csv("/Users/ajaykumarpatel/Desktop/Data Science/Grad DS Work/DSCI644 SWEN for Data Science/Group 7 Project Files/Software-Refactoring-Prediction-Model/dataset/yes_20k.csv")
     non_refactored_df = pd.read_csv("/Users/ajaykumarpatel/Desktop/Data Science/Grad DS Work/DSCI644 SWEN for Data Science/Group 7 Project Files/Software-Refactoring-Prediction-Model/dataset/no_10k.csv")
@@ -31,14 +30,13 @@ def get_labelled_instances(scaler= None, allowed_features= None, is_training_dat
     refactored_df["predictions"] = 1
     non_refactored_df["predictions"] = 0
     
-    #merge and shuffle the data
-    merged_df = pd.concat([refactored_df, non_refactored_df], axis=0).sample(frac=1, random_state = 42)
+    # if it's a test run, reduce the dataset to only a random sample.k
+    if TEST:
+        refactored_df = refactored_df.sample(frac= 0.2)
+        non_refactored_df = non_refactored_df.sample(frac= 0.2)
     
     print(refactored_df.info())
-    print(refactored_df.describe())
-    
     print(non_refactored_df.info())
-    print(non_refactored_df.describe())
     
     # drop the columns with all NaN values in them.
     refactored_df.dropna(axis=1, how='all', inplace=True)
@@ -55,9 +53,40 @@ def get_labelled_instances(scaler= None, allowed_features= None, is_training_dat
     refactored_df.fillna(refactored_df.median(), inplace=True)
     non_refactored_df.fillna(non_refactored_df.median(), inplace=True)
     
-    print(Counter(refactored_df.isnull().sum()))
-    print(Counter(non_refactored_df.isnull().sum()))
+    print(refactored_df.info())
+    print(non_refactored_df.info())
     
+    """ 
+    code to check which columns are present in one dataframe and not in the other.
     
+    # non_refactored_columns = set(non_refactored_df.columns)
+    # refactored_columns = set(refactored_df.columns)
+    
+    # column_difference = non_refactored_columns - refactored_columns
+    # print("Columns present in non-refactored df and not in refactored df:")
+    # for column in column_difference:
+    #     print(column)
+    
+    # column_difference2 =  refactored_columns - non_refactored_columns
+    # print("Columns present in non-refactored df and not in refactored df:")
+    # for column in column_difference2:
+    #     print(column)
+    
+    """
+    
+    # Merge the two dataframes
+    merged_df = pd.concat([refactored_df, non_refactored_df], axis=0)
+    # Add median to the null values in the merged dataframe.
+    merged_df.fillna(merged_df.median(), inplace=True)
+    
+    """ 
+    # print(merged_df[["classNumberOfDefaultFields", "classNumberOfDefaultMethods"]].value_counts())  
+    # dropping these two columns as they are almost always 0.
+    """
+    
+    merged_df = merged_df.drop(DROP_METRICS, axis=1)    
+    
+    X = merged_df.drop("predictions", axis=1)
+    y = merged_df["predictions"]
 
 get_labelled_instances(scaler= None, allowed_features= None, is_training_data= True)
