@@ -1,3 +1,7 @@
+import sys
+import os
+sys.path.append(os.getcwd())
+
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import ExtraTreesClassifier
 from sklearn.ensemble import RandomForestClassifier
