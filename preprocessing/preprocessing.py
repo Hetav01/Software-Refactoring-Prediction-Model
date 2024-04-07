@@ -104,10 +104,15 @@ def get_labelled_instances(scaler= None, allowed_features= None, is_training_dat
         X = perform_scaling(X, scaler)
 
     # Feature reduction
-    if is_training_data and FEATURE_REDUCTION:
+    if is_training_data and FEATURE_REDUCTION and allowed_features is None:
         X = perform_feature_reduction(X, y)
+    elif allowed_features is not None:
+        drop_list = [c for c in X.columns.values if c not in allowed_features]
+        X = X.drop(drop_list, axis=1)
     
     print("Final shape of the dataset: ", X.shape)
     print(X.head())
+    
+    return X.columns.values, X, y, scaler
 
 get_labelled_instances(scaler= None, allowed_features= None, is_training_data= True)
