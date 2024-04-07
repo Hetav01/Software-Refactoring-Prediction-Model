@@ -88,5 +88,7 @@ def get_labelled_instances(scaler= None, allowed_features= None, is_training_dat
     
     X = merged_df.drop("predictions", axis=1)
     y = merged_df["predictions"]
+    
+    
 
 get_labelled_instances(scaler= None, allowed_features= None, is_training_data= True)
