@@ -6,7 +6,8 @@ from collections import Counter
 import pandas as pd
 from configs import SCALE_DATASET, TEST, FEATURE_REDUCTION, BALANCE_DATASET, DROP_METRICS, \
     DROP_PROCESS_AND_AUTHORSHIP_METRICS, PROCESS_AND_AUTHORSHIP_METRICS, DROP_FAULTY_PROCESS_AND_AUTHORSHIP_METRICS
-from preprocessingHelper import perform_fit_scaling, perform_scaling, perform_feature_reduction
+from preprocessingHelper import perform_fit_scaling, perform_scaling, perform_feature_reduction, perform_balancing
+from sklearn.preprocessing import StandardScaler
 
 def get_labelled_instances(scaler= None, allowed_features= None, is_training_data: bool= True):
     
@@ -89,6 +90,24 @@ def get_labelled_instances(scaler= None, allowed_features= None, is_training_dat
     X = merged_df.drop("predictions", axis=1)
     y = merged_df["predictions"]
     
+    # Applying SMOTE to balance the dataset and populate it.
+    if (is_training_data and BALANCE_DATASET):
+        print("instances before balancing: ", Counter(y))
+        X, y = perform_balancing(X, y, "random")
+        assert X.shape[0] == y.shape[0]
+        print("instances after balancing: ", Counter(y))
     
+    # Scaling the dataset
+    if SCALE_DATASET and scaler is None:
+        X, scaler = perform_fit_scaling(X)
+    elif SCALE_DATASET and scaler is not None:
+        X = perform_scaling(X, scaler)
+
+    # Feature reduction
+    if is_training_data and FEATURE_REDUCTION:
+        X = perform_feature_reduction(X, y)
+    
+    print("Final shape of the dataset: ", X.shape)
+    print(X.head())
 
 get_labelled_instances(scaler= None, allowed_features= None, is_training_data= True)

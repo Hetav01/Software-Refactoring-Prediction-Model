@@ -5,7 +5,7 @@
 # test runs reduce the dataset to 100 instances only
 from enum import IntEnum
 
-TEST = False
+TEST = True
 
 # --------------------------------
 # FileTypes

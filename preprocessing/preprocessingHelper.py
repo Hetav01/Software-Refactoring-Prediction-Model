@@ -1,8 +1,10 @@
 import sys
 import os
+
+from sklearn.feature_selection import RFECV
 sys.path.append(os.getcwd())
 
-from configs import BALANCE_DATASET_STRATEGY
+from configs import BALANCE_DATASET_STRATEGY, N_CV_FEATURE_REDUCTION
 import pandas as pd
 from imblearn.over_sampling import SMOTE
 from imblearn.under_sampling import RandomUnderSampler, ClusterCentroids, NearMiss
@@ -37,7 +39,7 @@ def perform_scaling(x, scaler):
     :return: x, scaled
     """
     columns = x.columns
-    x = scaler.transform(x)
+    x = scaler.fit_transform(x)
     x = pd.DataFrame(x, columns=columns)  # keeping the column names
 
     return x
@@ -55,7 +57,7 @@ def perform_feature_reduction(x, y):
     """
 
     estimator = SVR(kernel="linear")
-    selector = RFECV(estimator, step=1, cv=2)    #N_CV_FEATURE_REDUCTION
+    selector = RFECV(estimator, step=1, cv= N_CV_FEATURE_REDUCTION)    #N_CV_FEATURE_REDUCTION
 
     # log("Features before reduction (total of {}): {}".format(len(x.columns.values), ', '.join(x.columns.values)))
     selector.fit(x, y)
@@ -92,5 +94,5 @@ def perform_balancing(x, y, strategy=None):
 
     new_x, new_y = rus.fit_resample(x, y)
     new_x = pd.DataFrame(new_x, columns=x.columns)
-    new_y = pd.DataFrame(new_y, columns=[y.name])
+    # new_y = pd.DataFrame(new_y, columns=[y.name])
     return new_x, new_y
