@@ -1,7 +1,7 @@
 import sys
 import os
 sys.path.append(os.getcwd())
-
+print(os.getcwd())
 from collections import Counter
 import pandas as pd
 from configs import SCALE_DATASET, TEST, FEATURE_REDUCTION, BALANCE_DATASET, DROP_METRICS, \
