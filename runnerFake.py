@@ -6,7 +6,7 @@ sys.path.append(os.getcwd())
 import pandas as pd
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
-from preprocessing import get_labelled_instances
+from preprocessing.preprocessing import get_labelled_instances
 from sklearn.metrics import accuracy_score
 
 model = LogisticRegression()
