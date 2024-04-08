@@ -114,5 +114,3 @@ def get_labelled_instances(scaler= None, allowed_features= None, is_training_dat
     print(X.head())
     
     return X.columns.values, X, y, scaler
-
-get_labelled_instances(scaler= None, allowed_features= None, is_training_data= True)
