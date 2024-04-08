@@ -6,13 +6,13 @@ from collections import Counter
 import pandas as pd
 from configs import SCALE_DATASET, TEST, FEATURE_REDUCTION, BALANCE_DATASET, DROP_METRICS, \
     DROP_PROCESS_AND_AUTHORSHIP_METRICS, PROCESS_AND_AUTHORSHIP_METRICS, DROP_FAULTY_PROCESS_AND_AUTHORSHIP_METRICS
-from preprocessingHelper import perform_fit_scaling, perform_scaling, perform_feature_reduction, perform_balancing
+from preprocessing.preprocessingHelper import perform_fit_scaling, perform_scaling, perform_feature_reduction, perform_balancing
 from sklearn.preprocessing import StandardScaler
 
 def get_labelled_instances(scaler= None, allowed_features= None, is_training_data: bool= True):
     
-    refactored_df = pd.read_csv("/Users/ajaykumarpatel/Desktop/Data Science/Grad DS Work/DSCI644 SWEN for Data Science/Group 7 Project Files/Software-Refactoring-Prediction-Model/dataset/yes_20k.csv")
-    non_refactored_df = pd.read_csv("/Users/ajaykumarpatel/Desktop/Data Science/Grad DS Work/DSCI644 SWEN for Data Science/Group 7 Project Files/Software-Refactoring-Prediction-Model/dataset/no_10k.csv")
+    refactored_df = pd.read_csv("dataset/yes_20k.csv")
+    non_refactored_df = pd.read_csv("dataset/no_10k.csv")
     
     print(f"---- Refactored dataframe shape: {refactored_df.shape}")
     print(f"---- Non-Refactored dataframe shape: {non_refactored_df.shape}")
@@ -114,3 +114,5 @@ def get_labelled_instances(scaler= None, allowed_features= None, is_training_dat
     print(X.head())
     
     return X.columns.values, X, y, scaler
+
+get_labelled_instances()
