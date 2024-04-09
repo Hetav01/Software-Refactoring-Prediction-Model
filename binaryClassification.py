@@ -2,6 +2,9 @@ import sys
 import os
 sys.path.append(os.getcwd())
 
+import warnings
+warnings.filterwarnings('ignore')
+
 from configs import DATASETS
 from ml.models.builder import build_models
 from ml.pipelines.binary import BinaryClassificationPipeline, _build_production_model, _evaluate_model,_evaluate_model_for_single_set
@@ -13,6 +16,7 @@ from sklearn.model_selection import RandomizedSearchCV, StratifiedKFold, GridSea
 # from pipelines.pipelines import MLPipeline
 from preprocessing.preprocessing import get_labelled_instances
 from ml.utils.output import format_best_parameters
+
 
 print("ML4Refactoring: Binary classification")
 
