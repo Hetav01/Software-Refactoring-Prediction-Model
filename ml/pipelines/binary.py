@@ -44,7 +44,11 @@ def _evaluate_model(search, x_train, x_tests, y_train, y_tests):
 
     return test_scores
 
+<<<<<<< HEAD
+def _evaluate_model_for_single_set(search, x_train, x_tests, y_train, y_tests):
+=======
 def _evaluate_model_for_single_set(search, x_train, x_test, y_train, y_test):
+>>>>>>> 7864a6e18143cc0bd404a1f42b4ef1f397c0e45a
     print("Test search started at %s\n" % now())
     search.fit(x_train, y_train)
     print(format_best_parameters(search))
@@ -52,6 +56,21 @@ def _evaluate_model_for_single_set(search, x_train, x_test, y_train, y_test):
 
     test_scores = {'accuracy': [], 'precision': [], 'recall': [], 'tn': [], 'fp': [], 'fn': [], 'tp': []}
     # Predict unseen results for all validation sets
+<<<<<<< HEAD
+    for index, x_test in enumerate(x_tests):
+        y_pred = best_estimator.predict(x_test)
+        y_test = y_tests[index]
+        test_scores["accuracy"] += [accuracy_score(y_test, y_pred)]
+        test_scores["precision"] += [precision_score(y_test, y_pred)]
+        test_scores["recall"] += [recall_score(y_test, y_pred)]
+        test_scores["tn"] += [confusion_matrix(y_test, y_pred).ravel()[0]]
+        test_scores["fp"] += [confusion_matrix(y_test, y_pred).ravel()[1]]
+        test_scores["fn"] += [confusion_matrix(y_test, y_pred).ravel()[2]]
+        test_scores["tp"] += [confusion_matrix(y_test, y_pred).ravel()[3]]
+
+    return test_scores
+
+=======
     y_pred = best_estimator.predict(x_test)
     test_scores["accuracy"] += [accuracy_score(y_test, y_pred)]
     test_scores["precision"] += [precision_score(y_test, y_pred)]
@@ -62,6 +81,7 @@ def _evaluate_model_for_single_set(search, x_train, x_test, y_train, y_test):
     test_scores["tp"] += [confusion_matrix(y_test, y_pred).ravel()[3]]
 
     return test_scores
+>>>>>>> 7864a6e18143cc0bd404a1f42b4ef1f397c0e45a
 
 class BinaryClassificationPipeline(MLPipeline):
     """
