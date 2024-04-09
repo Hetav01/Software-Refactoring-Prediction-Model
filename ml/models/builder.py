@@ -17,5 +17,3 @@ def build_models():
     }
 
     return [all_available_models[model] for model in MODELS]
-
-print(build_models())
