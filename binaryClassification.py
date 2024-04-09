@@ -4,7 +4,7 @@ sys.path.append(os.getcwd())
 
 from configs import DATASETS
 from ml.models.builder import build_models
-from ml.pipelines.binary import BinaryClassificationPipeline, _build_production_model, _evaluate_model
+from ml.pipelines.binary import BinaryClassificationPipeline, _build_production_model, _evaluate_model,_evaluate_model_for_single_set
 import pandas as pd
 from configs import SEARCH, N_CV_SEARCH, N_ITER_RANDOM_SEARCH, TEST_SPLIT_SIZE, VALIDATION_DATASETS, TEST
 from ml.utils.output import format_results_single_run
@@ -41,7 +41,7 @@ def _run_single_model(model_def, X, y, X_train, X_test, y_train, y_test):
         search = GridSearchCV(model, param_dist, cv=StratifiedKFold(n_splits=N_CV_SEARCH, shuffle=True), iid=False, n_jobs=-1)
 
     # Train and test the model
-    test_scores = _evaluate_model(search, X_train, X_test, y_train, y_test)
+    test_scores = _evaluate_model_for_single_set(search, X_train, X_test, y_train, y_test)
 
     # Run cross validation on whole dataset and safe production ready model
     super_model = _build_production_model(model_def, search.best_params_, X, y)
