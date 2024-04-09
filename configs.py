@@ -66,7 +66,7 @@ N_CV_FEATURE_REDUCTION = 5
 
 # what type of search for the best hyper params?
 # options = [randomized, grid]
-SEARCH = "grid"
+SEARCH = "randomized"
 
 # number of iterations (if Randomized strategy is chosen)
 N_ITER_RANDOM_SEARCH = 100

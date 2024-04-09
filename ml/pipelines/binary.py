@@ -5,12 +5,12 @@ sys.path.append(os.getcwd())
 import traceback
 import pandas as pd
 from configs import SEARCH, N_CV_SEARCH, N_ITER_RANDOM_SEARCH, TEST_SPLIT_SIZE, VALIDATION_DATASETS, TEST
-from utils.output import format_results_single_run
+from ml.utils.output import format_results_single_run
 from sklearn.metrics import accuracy_score, precision_score, recall_score, confusion_matrix
 from sklearn.model_selection import RandomizedSearchCV, StratifiedKFold, GridSearchCV, train_test_split
-from pipelines.pipelines import MLPipeline
+from ml.pipelines.pipelines import MLPipeline
 from preprocessing.preprocessing import get_labelled_instances
-from utils.output import format_best_parameters
+from ml.utils.output import format_best_parameters
 from utils.date_utils import now
 
 
@@ -24,6 +24,27 @@ def _build_production_model(model_def, best_params, x, y):
 
 
 def _evaluate_model(search, x_train, x_tests, y_train, y_tests):
+    print("Test search started at %s\n" % now())
+    search.fit(x_train, y_train)
+    print(format_best_parameters(search))
+    best_estimator = search.best_estimator_
+
+    test_scores = {'accuracy': [], 'precision': [], 'recall': [], 'tn': [], 'fp': [], 'fn': [], 'tp': []}
+    # Predict unseen results for all validation sets
+    for index, x_test in enumerate(x_tests):
+        y_pred = best_estimator.predict(x_test)
+        y_test = y_tests[index]
+        test_scores["accuracy"] += [accuracy_score(y_test, y_pred)]
+        test_scores["precision"] += [precision_score(y_test, y_pred)]
+        test_scores["recall"] += [recall_score(y_test, y_pred)]
+        test_scores["tn"] += [confusion_matrix(y_test, y_pred).ravel()[0]]
+        test_scores["fp"] += [confusion_matrix(y_test, y_pred).ravel()[1]]
+        test_scores["fn"] += [confusion_matrix(y_test, y_pred).ravel()[2]]
+        test_scores["tp"] += [confusion_matrix(y_test, y_pred).ravel()[3]]
+
+    return test_scores
+
+def _evaluate_model_for_single_set(search, x_train, x_tests, y_train, y_tests):
     print("Test search started at %s\n" % now())
     search.fit(x_train, y_train)
     print(format_best_parameters(search))
