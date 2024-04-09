@@ -54,4 +54,5 @@ def _run_single_model(model_def, X, y, X_train, X_test, y_train, y_test):
     # return the scores and the best estimator
     print(test_scores, super_model)
 
-_run_single_model(models[4], X, y, X_train, X_test, y_train, y_test)
+for model in models:
+    _run_single_model(model, X, y, X_train, X_test, y_train, y_test)
