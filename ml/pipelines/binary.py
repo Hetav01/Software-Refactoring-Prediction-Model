@@ -5,12 +5,12 @@ sys.path.append(os.getcwd())
 import traceback
 import pandas as pd
 from configs import SEARCH, N_CV_SEARCH, N_ITER_RANDOM_SEARCH, TEST_SPLIT_SIZE, VALIDATION_DATASETS, TEST
-from utils.output import format_results_single_run
+from ml.utils.output import format_results_single_run
 from sklearn.metrics import accuracy_score, precision_score, recall_score, confusion_matrix
 from sklearn.model_selection import RandomizedSearchCV, StratifiedKFold, GridSearchCV, train_test_split
-from pipelines.pipelines import MLPipeline
+from ml.pipelines.pipelines import MLPipeline
 from preprocessing.preprocessing import get_labelled_instances
-from utils.output import format_best_parameters
+from ml.utils.output import format_best_parameters
 from utils.date_utils import now
 
 

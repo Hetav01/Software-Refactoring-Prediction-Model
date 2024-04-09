@@ -3,7 +3,7 @@ import os
 sys.path.append(os.getcwd())
 
 from configs import MODELS
-from mlModels import LinearSVMRefactoringModel, RandomForestRefactoringModel, DecisionTreeRefactoringModel, LogisticRegressionRefactoringModel, NonLinearSVMRefactoringModel, GaussianNaiveBayesRefactoringModel, ExtraTreeRefactoringModel
+from ml.models.mlModels import LinearSVMRefactoringModel, RandomForestRefactoringModel, DecisionTreeRefactoringModel, LogisticRegressionRefactoringModel, NonLinearSVMRefactoringModel, GaussianNaiveBayesRefactoringModel, ExtraTreeRefactoringModel
 
 def build_models():
     all_available_models = {
