@@ -44,7 +44,7 @@ def _run_single_model(model_def, X, y, X_train, X_test, y_train, y_test):
     test_scores = _evaluate_model(search, X_train, X_test, y_train, y_test)
 
     # Run cross validation on whole dataset and safe production ready model
-    super_model = _build_production_model(model_def, search.best_params_, x, y)
+    super_model = _build_production_model(model_def, search.best_params_, X, y)
 
     # return the scores and the best estimator
     return test_scores, super_model
