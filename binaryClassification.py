@@ -29,6 +29,7 @@ models = build_models()
 
 def _run_single_model(model_def, X, y, X_train, X_test, y_train, y_test):
     model = model_def.model()
+    print(model_def)
 
     # perform the search for the best hyper parameters
     param_dist = model_def.params_to_tune()
@@ -49,4 +50,4 @@ def _run_single_model(model_def, X, y, X_train, X_test, y_train, y_test):
     # return the scores and the best estimator
     print(test_scores, super_model)
 
-_run_single_model(models[3], X, y, X_train, X_test, y_train, y_test)
+_run_single_model(models[4], X, y, X_train, X_test, y_train, y_test)
