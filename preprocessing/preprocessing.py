@@ -36,8 +36,8 @@ def get_labelled_instances(scaler= None, allowed_features= None, is_training_dat
         refactored_df = refactored_df.sample(frac= 0.2)
         non_refactored_df = non_refactored_df.sample(frac= 0.2)
     
-    print(refactored_df.info())
-    print(non_refactored_df.info())
+    # print(refactored_df.info())
+    # print(non_refactored_df.info())
     
     # drop the columns with all NaN values in them.
     refactored_df.dropna(axis=1, how='all', inplace=True)
@@ -54,8 +54,8 @@ def get_labelled_instances(scaler= None, allowed_features= None, is_training_dat
     refactored_df.fillna(refactored_df.median(), inplace=True)
     non_refactored_df.fillna(non_refactored_df.median(), inplace=True)
     
-    print(refactored_df.info())
-    print(non_refactored_df.info())
+    # print(refactored_df.info())
+    # print(non_refactored_df.info())
     
     """ 
     code to check which columns are present in one dataframe and not in the other.
@@ -109,9 +109,7 @@ def get_labelled_instances(scaler= None, allowed_features= None, is_training_dat
     elif allowed_features is not None:
         drop_list = [c for c in X.columns.values if c not in allowed_features]
         X = X.drop(drop_list, axis=1)
-    
-    print("Final shape of the dataset: ", X.shape)
-    print(X.head())
+
     
     return X.columns.values, X, y, scaler
 
