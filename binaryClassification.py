@@ -4,7 +4,11 @@ sys.path.append(os.getcwd())
 
 from configs import DATASETS
 from ml.models.builder import build_models
+<<<<<<< HEAD
 from ml.pipelines.binary import BinaryClassificationPipeline, _build_production_model, _evaluate_model, _evaluate_model_for_single_set
+=======
+from ml.pipelines.binary import BinaryClassificationPipeline, _build_production_model, _evaluate_model,_evaluate_model_for_single_set
+>>>>>>> 7864a6e18143cc0bd404a1f42b4ef1f397c0e45a
 import pandas as pd
 from configs import SEARCH, N_CV_SEARCH, N_ITER_RANDOM_SEARCH, TEST_SPLIT_SIZE, VALIDATION_DATASETS, TEST
 from ml.utils.output import format_results_single_run
