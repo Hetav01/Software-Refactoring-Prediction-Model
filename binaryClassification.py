@@ -32,14 +32,13 @@ def _run_single_model(model_def, X, y, X_train, X_test, y_train, y_test):
 
     # perform the search for the best hyper parameters
     param_dist = model_def.params_to_tune()
-    print(param_dist)
     search = None
 
     # choose which search to apply
     if SEARCH == 'randomized':
         search = RandomizedSearchCV(model, param_dist, n_iter=N_ITER_RANDOM_SEARCH, cv=StratifiedKFold(n_splits=N_CV_SEARCH, shuffle=True), n_jobs=-1)
     elif SEARCH == 'grid':
-        search = GridSearchCV(model, param_dist, cv=StratifiedKFold(n_splits=N_CV_SEARCH, shuffle=True), n_jobs=-1)
+        search = GridSearchCV(model, param_dist, cv=StratifiedKFold(n_splits=N_CV_SEARCH, shuffle=True), iid=False, n_jobs=-1)
 
     # Train and test the model
     test_scores = _evaluate_model_for_single_set(search, X_train, X_test, y_train, y_test)
