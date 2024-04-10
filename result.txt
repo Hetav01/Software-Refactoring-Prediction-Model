@@ -1,0 +1,20 @@
+Model Name:SVC(shrinking=False)
+{'accuracy': [0.99625], 'precision': [0.9973474801061007], 'recall': [0.9947089947089947], 'tn': [421], 'fp': [1], 'fn': [2], 'tp': [376]} 
+
+Model Name:SVC(shrinking=False)
+{'accuracy': [0.9975], 'precision': [0.9973544973544973], 'recall': [0.9973544973544973], 'tn': [421], 'fp': [1], 'fn': [1], 'tp': [377]} 
+
+Model Name:DecisionTreeClassifier(random_state=42)
+{'accuracy': [1.0], 'precision': [1.0], 'recall': [1.0], 'tn': [422], 'fp': [0], 'fn': [0], 'tp': [378]} 
+
+Model Name:RandomForestClassifier(random_state=42)
+{'accuracy': [0.99875], 'precision': [1.0], 'recall': [0.9973544973544973], 'tn': [422], 'fp': [0], 'fn': [1], 'tp': [377]} 
+
+Model Name:LogisticRegression()
+{'accuracy': [0.995], 'precision': [0.9973404255319149], 'recall': [0.9920634920634921], 'tn': [421], 'fp': [1], 'fn': [3], 'tp': [375]} 
+
+Model Name:GaussianNB()
+{'accuracy': [0.8975], 'precision': [0.8425925925925926], 'recall': [0.9629629629629629], 'tn': [354], 'fp': [68], 'fn': [14], 'tp': [364]} 
+
+Model Name:ExtraTreesClassifier(random_state=42)
+{'accuracy': [0.99625], 'precision': [0.9947229551451188], 'recall': [0.9973544973544973], 'tn': [420], 'fp': [2], 'fn': [1], 'tp': [377]} 

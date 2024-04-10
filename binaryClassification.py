@@ -1,5 +1,6 @@
 import sys
 import os
+import time
 sys.path.append(os.getcwd())
 
 import warnings
@@ -32,8 +33,12 @@ models = build_models()
 
 
 def _run_single_model(model_def, X, y, X_train, X_test, y_train, y_test):
+    file1 = open("result.txt","a")
+    # start_time = time.time()
     model = model_def.model()
-    print(model_def)
+    file1.write("Model Name:")
+    file1.write(str(model))
+    file1.write("\n")
 
     # perform the search for the best hyper parameters
     param_dist = model_def.params_to_tune()
@@ -47,12 +52,18 @@ def _run_single_model(model_def, X, y, X_train, X_test, y_train, y_test):
 
     # Train and test the model
     test_scores = _evaluate_model_for_single_set(search, X_train, X_test, y_train, y_test)
-
+    file1.write("Test Scores:")
+    file1.write(str(test_scores))
+    
+    file1.write("\n")
+    file1.write("\n")
     # Run cross validation on whole dataset and safe production ready model
-    super_model = _build_production_model(model_def, search.best_params_, X, y)
-
+    # super_model = _build_production_model(model_def, search.best_params_, X, y)
+    # end_time = time.time()
+    file1.close()
     # return the scores and the best estimator
-    print(test_scores, super_model)
+    print(test_scores)
 
 for model in models:
     _run_single_model(model, X, y, X_train, X_test, y_train, y_test)
+
