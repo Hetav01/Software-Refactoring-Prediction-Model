@@ -2,6 +2,7 @@ import sys
 import os
 sys.path.append(os.getcwd())
 
+import numpy as np
 import traceback
 import pandas as pd
 from configs import SEARCH, N_CV_SEARCH, N_ITER_RANDOM_SEARCH, TEST_SPLIT_SIZE, VALIDATION_DATASETS, TEST
@@ -53,15 +54,31 @@ def _evaluate_model_for_single_set(search, x_train, x_test, y_train, y_test):
     test_scores = {'accuracy': [], 'precision': [], 'recall': [], 'tn': [], 'fp': [], 'fn': [], 'tp': []}
     # Predict unseen results for all validation sets
     y_pred = best_estimator.predict(x_test)
-    test_scores["accuracy"] += [accuracy_score(y_test, y_pred)]
-    test_scores["precision"] += [precision_score(y_test, y_pred)]
-    test_scores["recall"] += [recall_score(y_test, y_pred)]
-    test_scores["tn"] += [confusion_matrix(y_test, y_pred).ravel()[0]]
-    test_scores["fp"] += [confusion_matrix(y_test, y_pred).ravel()[1]]
-    test_scores["fn"] += [confusion_matrix(y_test, y_pred).ravel()[2]]
-    test_scores["tp"] += [confusion_matrix(y_test, y_pred).ravel()[3]]
+    test_scores["accuracy"] = [accuracy_score(y_test, y_pred)]
+    test_scores["precision"] = [precision_score(y_test, y_pred)]
+    test_scores["recall"] = [recall_score(y_test, y_pred)]
+    
+    print("The accuracy of the model is: ", test_scores["accuracy"], "\n")
+    print("The precision of the model is: ", test_scores["precision"], "\n")
+    print("The recall of the model is: ", test_scores["recall"], "\n")
+    
+    # Get the values from the dictionary
+    tn_values = test_scores["tn"]
+    fp_values = test_scores["fp"]
+    fn_values = test_scores["fn"]
+    tp_values = test_scores["tp"]
+    
+    # Construct the confusion matrix as one whole matrix
+    confusion_matrix = np.array([[tn_values, fp_values],
+                                [fn_values, tp_values]])
 
-    return test_scores
+    print("------------------------------------\n")
+    print("Confusion Matrix:")
+    print(confusion_matrix)
+    print("\n----------------------------------")
+    
+
+    
 
 class BinaryClassificationPipeline(MLPipeline):
     """
