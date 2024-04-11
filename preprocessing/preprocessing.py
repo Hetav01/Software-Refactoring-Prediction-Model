@@ -1,7 +1,8 @@
 import sys
 import os
 sys.path.append(os.getcwd())
-print(os.getcwd())
+
+# print(os.getcwd())
 from collections import Counter
 import pandas as pd
 from configs import SCALE_DATASET, TEST, FEATURE_REDUCTION, BALANCE_DATASET, DROP_METRICS, \
@@ -9,10 +10,28 @@ from configs import SCALE_DATASET, TEST, FEATURE_REDUCTION, BALANCE_DATASET, DRO
 from preprocessing.preprocessingHelper import perform_fit_scaling, perform_scaling, perform_feature_reduction, perform_balancing
 from sklearn.preprocessing import StandardScaler
 
-def get_labelled_instances(scaler= None, allowed_features= None, is_training_data: bool= True):
+def get_external_dataset():
+    file_path_for_refactored = input("Enter the path of refactored data file: ")
+    file_path_for_non_refactored = input("Enter the path of non-refactored data file: ")
     
-    refactored_df = pd.read_csv("dataset/yes_20k.csv")
-    non_refactored_df = pd.read_csv("dataset/no_10k.csv")
+    try:
+        refactored_df = pd.read_csv(file_path_for_refactored)
+        non_refactored_df = pd.read_csv(file_path_for_non_refactored)
+    except FileNotFoundError:
+        print("File not found. Please provide correct file paths.")
+        return
+
+    return refactored_df, non_refactored_df
+
+def get_labelled_instances(dataset= None, scaler= None, allowed_features= None, is_training_data: bool= True):
+    
+    if dataset is None:
+        refactored_df = pd.read_csv("dataset/yes_20k.csv")
+        non_refactored_df = pd.read_csv("dataset/no_10k.csv")    
+    
+    else:
+        refactored_df = dataset[0]
+        non_refactored_df = dataset[1]
     
     print(f"---- Refactored dataframe shape: {refactored_df.shape}")
     print(f"---- Non-Refactored dataframe shape: {non_refactored_df.shape}")

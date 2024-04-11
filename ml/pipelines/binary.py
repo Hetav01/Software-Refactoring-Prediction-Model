@@ -77,6 +77,8 @@ def _evaluate_model_for_single_set(search, x_train, x_test, y_train, y_test):
     print(confusion_matrix)
     print("\n----------------------------------")
     
+    return test_scores, best_estimator
+    
 
     
 
