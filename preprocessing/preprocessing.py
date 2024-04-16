@@ -109,12 +109,12 @@ def get_labelled_instances(dataset= None, scaler= None, allowed_features= None, 
     X = merged_df.drop("predictions", axis=1)
     y = merged_df["predictions"]
     
-    # Applying SMOTE to balance the dataset and populate it.
-    if (is_training_data and BALANCE_DATASET):
-        print("instances before balancing: ", Counter(y))
-        X, y = perform_balancing(X, y, "random")
-        assert X.shape[0] == y.shape[0]
-        print("instances after balancing: ", Counter(y))
+    # # Applying SMOTE to balance the dataset and populate it.
+    # if (is_training_data and BALANCE_DATASET):
+    #     print("instances before balancing: ", Counter(y))
+    #     X, y = perform_balancing(X, y, "random")
+    #     assert X.shape[0] == y.shape[0]
+    #     print("instances after balancing: ", Counter(y))
     
     # Scaling the dataset
     if SCALE_DATASET and scaler is None:

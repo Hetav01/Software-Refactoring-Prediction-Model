@@ -36,7 +36,7 @@ X_val_columns, X_val, y_val= get_labelled_instances(dataset= (refactored_val, no
 X_val = pd.DataFrame(data= X_val, columns= X_val_columns)
 
 #get the training and testing data
-X_columns, X, y= get_labelled_instances()[:3]
+X_columns, X, y = get_labelled_instances()[:3]
 X = pd.DataFrame(data= X, columns= X_columns)
 X_train, X_test, y_train, y_test= train_test_split(X, y, test_size= 0.2, random_state= 42)
 
