@@ -101,7 +101,7 @@ def evaluate_on_unseen_data(model, X_unseen, y_unseen):
     confusion_matrix = np.array([[tn_values, fp_values],
                                 [fn_values, tp_values]])
     
-    return test_scores, best_estimator
+    return test_scores
 
     print("------------------------------------\n")
     print("Confusion Matrix:")

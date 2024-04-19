@@ -74,9 +74,26 @@ def _run_single_model(model_def, X, y, X_train, X_test, y_train, y_test):
     # Run cross validation on whole dataset and safe production ready model
     # super_model = _build_production_model(model_def, search.best_params_, X, y)
     # end_time = time.time()
-    evaluate_on_unseen_data(best_estimator, X_unseen, y_unseen)
+    
+    file2 = open("result_unseen.txt","a")
+    file2.write("Model Name:")
+    file2.write(str(model))
+    file2.write("\n")
+    
+    test_scores_unseen = evaluate_on_unseen_data(best_estimator, X_unseen, y_unseen)
+    
+    print("Results for unseen data:")
+    print(test_scores)
+    file2.write("Test Scores:")
+    file2.write("\n")
+    file2.write(str(test_scores))
+    
+    file2.write("\n")
+    file2.write("\n")
+    file2.close()
     
     file1.close()
+    file2.close()
     # return the scores and the best estimator
     print(test_scores)
 
