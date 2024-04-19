@@ -25,8 +25,8 @@ def get_external_dataset():
 
 def get_labelled_instances(dataset= None, scaler= None, allowed_features= None, is_training_data: bool= True):
     
-    refactored_df = pd.read_csv("dataset/yes_20k.csv")
-    non_refactored_df = pd.read_csv("dataset/no_10k.csv")    
+    refactored_df = pd.read_csv("dataset/yes_1.csv")
+    non_refactored_df = pd.read_csv("dataset/no_1.csv")    
 
     print(f"---- Refactored dataframe shape: {refactored_df.shape}")
     print(f"---- Non-Refactored dataframe shape: {non_refactored_df.shape}")
@@ -129,9 +129,9 @@ def get_labelled_instances(dataset= None, scaler= None, allowed_features= None, 
     return X.columns.values, X, y, scaler, selector
 
 def preprocess_unseen_data(scaler, selector):
-    
-    unseen_refactored = pd.read_csv("dataset/yes_20k.csv")
-    unseen_non_refactored = pd.read_csv("dataset/no_10k.csv")
+
+    unseen_refactored = pd.read_csv("dataset/yes_2.csv")
+    unseen_non_refactored = pd.read_csv("dataset/no_2.csv")
     
     # drop the columns with all NaN values in them.
     unseen_refactored.dropna(axis=1, how='all', inplace=True)

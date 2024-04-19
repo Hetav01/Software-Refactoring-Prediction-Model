@@ -77,7 +77,7 @@ def _evaluate_model_for_single_set(search, x_train, x_test, y_train, y_test):
     print(confusion_matrix)
     print("\n----------------------------------")
     
-    return test_scores, best_estimator
+    return test_scores
 
 def evaluate_on_unseen_data(model, X_unseen, y_unseen):
     test_scores = {'accuracy': [], 'precision': [], 'recall': [], 'tn': [], 'fp': [], 'fn': [], 'tp': []}
@@ -100,14 +100,14 @@ def evaluate_on_unseen_data(model, X_unseen, y_unseen):
     # Construct the confusion matrix as one whole matrix
     confusion_matrix = np.array([[tn_values, fp_values],
                                 [fn_values, tp_values]])
+    
+    return test_scores, best_estimator
 
     print("------------------------------------\n")
     print("Confusion Matrix:")
     print(confusion_matrix)
     print("\n----------------------------------")
     
-    
-
     
 
 class BinaryClassificationPipeline(MLPipeline):
@@ -210,6 +210,7 @@ class BinaryClassificationPipeline(MLPipeline):
                 print(str(e))
                 print(str(traceback.format_exc()))
 
+
     def _run_single_model(self, model_def, x, y, x_train, x_tests, y_train, y_tests):
         model = model_def.model()
 
@@ -229,5 +230,6 @@ class BinaryClassificationPipeline(MLPipeline):
         # Run cross validation on whole dataset and safe production ready model
         super_model = _build_production_model(model_def, search.best_params_, x, y)
 
+        
         # return the scores and the best estimator
         return test_scores, super_model
