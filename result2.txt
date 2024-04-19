@@ -1,0 +1,257 @@
+C:\Users\group7\Downloads\Software-Refactoring-Prediction-Model
+---- Refactored dataframe shape: (20000, 83)
+---- Non-Refactored dataframe shape: (10000, 81)
+---- Refactored dataframe shape after dropping NaN values: (20000, 83)
+---- Non-Refactored dataframe shape after dropping NaN values: (10000, 81)
+nulls:--------------------------------
+Counter({0: 57, 257: 23, 2599: 2})
+Counter({0: 55, 306: 23, 1715: 2, 808: 2})
+instances before balancing:  Counter({1: 4000, 0: 2000})
+instances after balancing:  Counter({0: 2000, 1: 2000})
+ML4Refactoring: Binary classification
+---- Refactored dataframe shape: (20000, 83)
+---- Non-Refactored dataframe shape: (10000, 81)
+---- Refactored dataframe shape after dropping NaN values: (20000, 83)
+---- Non-Refactored dataframe shape after dropping NaN values: (10000, 81)
+nulls:--------------------------------
+Counter({0: 57, 228: 23, 2525: 2})
+Counter({0: 55, 301: 23, 1719: 2, 790: 2})
+instances before balancing:  Counter({1: 4000, 0: 2000})
+instances after balancing:  Counter({0: 2000, 1: 2000})
+Test search started at 2024-04-10 02:10:35
+
+Hyperparametrization:
+{
+  "shrinking": false,
+  "kernel": "linear",
+  "C": 9.027008457478289
+}
+Best result: 0.9953125
+{'accuracy': [0.99625], 'precision': [0.9973474801061007], 'recall': [0.9947089947089947], 'tn': [421], 'fp': [1], 'fn': [2], 'tp': [376]}
+Test search started at 2024-04-10 02:10:39
+
+Hyperparametrization:
+{
+  "kernel": "poly",
+  "gamma": 6.868611394258735,
+  "degree": 3,
+  "decision_function_shape": "ovr",
+  "C": 0.1315236255255337
+}
+Best result: 0.9984375
+{'accuracy': [0.9975], 'precision': [1.0], 'recall': [0.9947089947089947], 'tn': [422], 'fp': [0], 'fn': [2], 'tp': [376]}
+Test search started at 2024-04-10 02:10:56
+
+Hyperparametrization:
+{
+  "splitter": "random",
+  "min_samples_split": 11,
+  "max_features": null,
+  "max_depth": 24,
+  "criterion": "gini"
+}
+Best result: 0.9965624999999999
+{'accuracy': [0.9925], 'precision': [0.9946808510638298], 'recall': [0.9894179894179894], 'tn': [420], 'fp': [2], 'fn': [4], 'tp': [374]}
+Test search started at 2024-04-10 02:10:58
+
+Hyperparametrization:
+{
+  "n_estimators": 10,
+  "min_samples_split": 3,
+  "max_features": "sqrt",
+  "max_depth": 24,
+  "criterion": "gini",
+  "bootstrap": false
+}
+Best result: 0.9996875
+{'accuracy': [1.0], 'precision': [1.0], 'recall': [1.0], 'tn': [422], 'fp': [0], 'fn': [0], 'tp': [378]}
+Test search started at 2024-04-10 02:11:29
+
+Hyperparametrization:
+{
+  "max_iter": 50,
+  "C": 99.51360931540684
+}
+Best result: 0.9962500000000001
+{'accuracy': [0.99625], 'precision': [1.0], 'recall': [0.9920634920634921], 'tn': [422], 'fp': [0], 'fn': [3], 'tp': [375]}
+Test search started at 2024-04-10 02:11:30
+
+Hyperparametrization:
+{
+  "var_smoothing": 1e-10
+}
+Best result: 0.8628124999999999
+{'accuracy': [0.82], 'precision': [0.7427385892116183], 'recall': [0.9470899470899471], 'tn': [298], 'fp': [124], 'fn': [20], 'tp': [358]}
+Test search started at 2024-04-10 02:11:30
+
+Hyperparametrization:
+{
+  "n_estimators": 200,
+  "min_samples_split": 10,
+  "min_samples_leaf": 10,
+  "max_leaf_nodes": null,
+  "max_features": null,
+  "max_depth": null,
+  "criterion": "entropy",
+  "bootstrap": false
+}
+Best result: 0.9981249999999999
+{'accuracy': [1.0], 'precision': [1.0], 'recall': [1.0], 'tn': [422], 'fp': [0], 'fn': [0], 'tp': [378]}
+PS C:\Users\group7\Downloads\Software-Refactoring-Prediction-Model> & "C:/Program Files/Python312/python.exe" c:/Users/group7/Downloads/Software-Refactoring-Predicti
+on-Model/binaryClassification.py
+C:\Users\group7\Downloads\Software-Refactoring-Prediction-Model
+---- Refactored dataframe shape: (20000, 83)
+---- Non-Refactored dataframe shape: (10000, 81)
+---- Refactored dataframe shape after dropping NaN values: (20000, 83)
+---- Non-Refactored dataframe shape after dropping NaN values: (10000, 81)
+nulls:--------------------------------
+Counter({0: 57, 1156: 23, 12869: 2})
+Counter({0: 55, 1422: 23, 8669: 2, 3847: 2})
+instances before balancing:  Counter({1: 20000, 0: 10000})
+Traceback (most recent call last):
+  File "c:\Users\group7\Downloads\Software-Refactoring-Prediction-Model\binaryClassification.py", line 11, in <module>
+    from ml.pipelines.binary import BinaryClassificationPipeline, _build_production_model, _evaluate_model,_evaluate_model_for_single_set
+  File "c:\Users\group7\Downloads\Software-Refactoring-Prediction-Model\ml\pipelines\binary.py", line 12, in <module>
+    from preprocessing.preprocessing import get_labelled_instances
+  File "c:\Users\group7\Downloads\Software-Refactoring-Prediction-Model\preprocessing\preprocessing.py", line 116, in <module>
+    get_labelled_instances()
+  File "c:\Users\group7\Downloads\Software-Refactoring-Prediction-Model\preprocessing\preprocessing.py", line 96, in get_labelled_instances
+    X, y = perform_balancing(X, y, "SMOTE")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\group7\Downloads\Software-Refactoring-Prediction-Model\preprocessing\preprocessingHelper.py", line 93, in perform_balancing
+    raise Exception("algorithm not found")
+Exception: algorithm not found
+PS C:\Users\group7\Downloads\Software-Refactoring-Prediction-Model> & "C:/Program Files/Python312/python.exe" c:/Users/group7/Downloads/Software-Refactoring-Predicti
+on-Model/binaryClassification.py
+C:\Users\group7\Downloads\Software-Refactoring-Prediction-Model
+---- Refactored dataframe shape: (20000, 83)
+---- Non-Refactored dataframe shape: (10000, 81)
+---- Refactored dataframe shape after dropping NaN values: (20000, 83)
+---- Non-Refactored dataframe shape after dropping NaN values: (10000, 81)
+nulls:--------------------------------
+Counter({0: 57, 1156: 23, 12869: 2})
+Counter({0: 55, 1422: 23, 8669: 2, 3847: 2})
+instances before balancing:  Counter({1: 20000, 0: 10000})
+Traceback (most recent call last):
+  File "c:\Users\group7\Downloads\Software-Refactoring-Prediction-Model\binaryClassification.py", line 11, in <module>
+    from ml.pipelines.binary import BinaryClassificationPipeline, _build_production_model, _evaluate_model,_evaluate_model_for_single_set
+  File "c:\Users\group7\Downloads\Software-Refactoring-Prediction-Model\ml\pipelines\binary.py", line 12, in <module>
+    from preprocessing.preprocessing import get_labelled_instances
+  File "c:\Users\group7\Downloads\Software-Refactoring-Prediction-Model\preprocessing\preprocessing.py", line 116, in <module>
+    get_labelled_instances()
+  File "c:\Users\group7\Downloads\Software-Refactoring-Prediction-Model\preprocessing\preprocessing.py", line 96, in get_labelled_instances
+    X, y = perform_balancing(X, y, "SMOTE")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\group7\Downloads\Software-Refactoring-Prediction-Model\preprocessing\preprocessingHelper.py", line 93, in perform_balancing
+    raise Exception("algorithm not found")
+Exception: algorithm not found
+PS C:\Users\group7\Downloads\Software-Refactoring-Prediction-Model> & "C:/Program Files/Python312/python.exe" c:/Users/group7/Downloads/Software-Refactoring-Predicti
+on-Model/binaryClassification.py
+C:\Users\group7\Downloads\Software-Refactoring-Prediction-Model
+---- Refactored dataframe shape: (20000, 83)
+---- Non-Refactored dataframe shape: (10000, 81)
+---- Refactored dataframe shape after dropping NaN values: (20000, 83)
+---- Non-Refactored dataframe shape after dropping NaN values: (10000, 81)
+nulls:--------------------------------
+Counter({0: 57, 1156: 23, 12869: 2})
+Counter({0: 55, 1422: 23, 8669: 2, 3847: 2})
+instances before balancing:  Counter({1: 20000, 0: 10000})
+instances after balancing:  Counter({1: 20000, 0: 20000})
+ML4Refactoring: Binary classification
+---- Refactored dataframe shape: (20000, 83)
+---- Non-Refactored dataframe shape: (10000, 81)
+---- Refactored dataframe shape after dropping NaN values: (20000, 83)
+---- Non-Refactored dataframe shape after dropping NaN values: (10000, 81)
+nulls:--------------------------------
+Counter({0: 57, 1156: 23, 12869: 2})
+Counter({0: 55, 1422: 23, 8669: 2, 3847: 2})
+instances before balancing:  Counter({1: 20000, 0: 10000})
+instances after balancing:  Counter({1: 20000, 0: 20000})
+Test search started at 2024-04-10 12:47:36
+
+Hyperparametrization:
+{
+  "shrinking": false,
+  "kernel": "linear",
+  "C": 8.164915311553958
+}
+Best result: 0.999375
+{'accuracy': [0.99975], 'precision': [1.0], 'recall': [0.9995017438963627], 'tn': [3986], 'fp': [0], 'fn': [2], 'tp': [4012]}
+Test search started at 2024-04-10 12:48:06
+
+Hyperparametrization:
+{
+  "kernel": "rbf",
+  "gamma": 1.1897751483743697,
+  "degree": 2,
+  "decision_function_shape": "ovo",
+  "C": 9.319514830385152
+}
+Best result: 0.9998437500000001
+{'accuracy': [0.999875], 'precision': [1.0], 'recall': [0.9997508719481814], 'tn': [3986], 'fp': [0], 'fn': [1], 'tp': [4013]}
+Test search started at 2024-04-10 13:13:25
+
+Hyperparametrization:
+{
+  "splitter": "random",
+  "min_samples_split": 10,
+  "max_features": null,
+  "max_depth": null,
+  "criterion": "entropy"
+}
+Best result: 0.999625
+{'accuracy': [1.0], 'precision': [1.0], 'recall': [1.0], 'tn': [3986], 'fp': [0], 'fn': [0], 'tp': [4014]}
+Test search started at 2024-04-10 13:13:31
+
+Hyperparametrization:
+{
+  "n_estimators": 150,
+  "min_samples_split": 3,
+  "max_features": "sqrt",
+  "max_depth": 24,
+  "criterion": "entropy",
+  "bootstrap": false
+}
+Best result: 0.9999687500000001
+{'accuracy': [1.0], 'precision': [1.0], 'recall': [1.0], 'tn': [3986], 'fp': [0], 'fn': [0], 'tp': [4014]}
+Test search started at 2024-04-10 13:21:42
+
+Hyperparametrization:
+{
+  "max_iter": 50,
+  "C": 91.07656831110944
+}
+Best result: 0.99925
+{'accuracy': [0.99925], 'precision': [1.0], 'recall': [0.9985052316890882], 'tn': [3986], 'fp': [0], 'fn': [6], 'tp': [4008]}
+Test search started at 2024-04-10 13:21:55
+
+Hyperparametrization:
+{
+  "var_smoothing": 1e-05
+}
+Best result: 0.9174062500000002
+{'accuracy': [0.9185], 'precision': [0.8782628262826283], 'recall': [0.9723467862481315], 'tn': [3445], 'fp': [541], 'fn': [111], 'tp': [3903]}
+Test search started at 2024-04-10 13:21:56
+
+Hyperparametrization:
+{
+  "n_estimators": 200,
+  "min_samples_split": 5,
+  "min_samples_leaf": 3,
+  "max_leaf_nodes": null,
+  "max_features": null,
+  "max_depth": 12,
+  "criterion": "entropy",
+  "bootstrap": true
+}
+Best result: 0.9999062500000001
+{'accuracy': [0.999875], 'precision': [1.0], 'recall': [0.9997508719481814], 'tn': [3986], 'fp': [0], 'fn': [1], 'tp': [4013]}
+PS C:\Users\group7\Downloads\Software-Refactoring-Prediction-Model>
+
+
+
+
+
+
+
+
