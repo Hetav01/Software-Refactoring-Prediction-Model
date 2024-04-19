@@ -22,7 +22,7 @@ from ml.utils.output import format_best_parameters
 print("ML4Refactoring: Binary classification")
 
 # Get the data
-X_columns, X, y= get_labelled_instances()[:3]
+X_columns, X, y = get_labelled_instances()[:3]
 
 X = pd.DataFrame(data= X, columns= X_columns)
 

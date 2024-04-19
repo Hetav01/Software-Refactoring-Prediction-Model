@@ -67,7 +67,7 @@ def perform_feature_reduction(x, y):
     # log("Feature ranking: {}".format(', '.join(str(e) for e in selector.ranking_)))
     # log("Feature grid scores: {}".format(', '.join(str(e) for e in selector.grid_scores_)))
 
-    return x
+    return x, selector
 
 
 def perform_balancing(x, y, strategy=None):

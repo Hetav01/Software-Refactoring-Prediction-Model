@@ -25,14 +25,9 @@ def get_external_dataset():
 
 def get_labelled_instances(dataset= None, scaler= None, allowed_features= None, is_training_data: bool= True):
     
-    if dataset is None:
-        refactored_df = pd.read_csv("dataset/yes_20k.csv")
-        non_refactored_df = pd.read_csv("dataset/no_10k.csv")    
-    
-    else:
-        refactored_df = dataset[0]
-        non_refactored_df = dataset[1]
-    
+    refactored_df = pd.read_csv("dataset/yes_20k.csv")
+    non_refactored_df = pd.read_csv("dataset/no_10k.csv")    
+
     print(f"---- Refactored dataframe shape: {refactored_df.shape}")
     print(f"---- Non-Refactored dataframe shape: {non_refactored_df.shape}")
     
@@ -60,6 +55,7 @@ def get_labelled_instances(dataset= None, scaler= None, allowed_features= None, 
     
     # drop the columns with all NaN values in them.
     refactored_df.dropna(axis=1, how='all', inplace=True)
+    non_refactored_df.dropna(axis=1, how='all', inplace=True)
     
     print("nulls:--------------------------------")
     print(Counter(refactored_df.isnull().sum()))
@@ -124,12 +120,52 @@ def get_labelled_instances(dataset= None, scaler= None, allowed_features= None, 
 
     # Feature reduction
     if is_training_data and FEATURE_REDUCTION and allowed_features is None:
-        X = perform_feature_reduction(X, y)
+        X, selector = perform_feature_reduction(X, y)
     elif allowed_features is not None:
         drop_list = [c for c in X.columns.values if c not in allowed_features]
         X = X.drop(drop_list, axis=1)
 
     
-    return X.columns.values, X, y, scaler
+    return X.columns.values, X, y, scaler, selector
 
-get_labelled_instances()
+def preprocess_unseen_data(scaler, selector):
+    
+    unseen_refactored = pd.read_csv("dataset/yes_20k.csv")
+    unseen_non_refactored = pd.read_csv("dataset/no_10k.csv")
+    
+    # drop the columns with all NaN values in them.
+    unseen_refactored.dropna(axis=1, how='all', inplace=True)
+    unseen_non_refactored.dropna(axis=1, how='all', inplace=True)
+    
+    print("nulls:--------------------------------")
+    print(Counter(unseen_refactored.isnull().sum()))
+    print(Counter(unseen_non_refactored.isnull().sum()))
+    
+    # dropping all the columns which are not numeric.
+    unseen_refactored = unseen_refactored.select_dtypes(include=['number'])
+    unseen_non_refactored = unseen_non_refactored.select_dtypes(include=['number'])
+    
+    # Replace null values with median
+    unseen_refactored.fillna(unseen_refactored.median(), inplace=True)
+    unseen_non_refactored.fillna(unseen_non_refactored.median(), inplace=True)
+    
+     # Merge the two dataframes
+    unseen_data = pd.concat([unseen_refactored, unseen_non_refactored], axis=0)
+    
+    # Add median to the null values in the merged dataframe.
+    unseen_data.fillna(unseen_data.median(), inplace=True)
+    
+    unseen_data = unseen_data.drop(DROP_METRICS, axis=1)    
+    
+    X_unseen = unseen_data.drop("predictions", axis=1)
+    y_unseen = unseen_data["predictions"]
+    
+    # Scale the dataset.
+    X_unseen = scaler.transform(X_unseen)
+    
+    # Drop columns not present in the selector.
+    X_unseen = X_unseen.iloc[:, selector.get_support(indices= True)]
+    
+    return X_unseen.columns.values, X_unseen, y_unseen
+
+# get_labelled_instances()

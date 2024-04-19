@@ -78,6 +78,34 @@ def _evaluate_model_for_single_set(search, x_train, x_test, y_train, y_test):
     print("\n----------------------------------")
     
     return test_scores, best_estimator
+
+def evaluate_on_unseen_data(model, X_unseen, y_unseen):
+    test_scores = {'accuracy': [], 'precision': [], 'recall': [], 'tn': [], 'fp': [], 'fn': [], 'tp': []}
+    # Predict unseen results for all validation sets
+    y_pred_unseen = model.predict(X_unseen)
+    test_scores["accuracy"] = [accuracy_score(y_unseen, y_pred_unseen)]
+    test_scores["precision"] = [precision_score(y_unseen, y_pred_unseen)]
+    test_scores["recall"] = [recall_score(y_unseen, y_pred_unseen)]
+    
+    print("The accuracy of the model is: ", test_scores["accuracy"], "\n")
+    print("The precision of the model is: ", test_scores["precision"], "\n")
+    print("The recall of the model is: ", test_scores["recall"], "\n")
+    
+    # Get the values from the dictionary
+    tn_values = test_scores["tn"]
+    fp_values = test_scores["fp"]
+    fn_values = test_scores["fn"]
+    tp_values = test_scores["tp"]
+    
+    # Construct the confusion matrix as one whole matrix
+    confusion_matrix = np.array([[tn_values, fp_values],
+                                [fn_values, tp_values]])
+
+    print("------------------------------------\n")
+    print("Confusion Matrix:")
+    print(confusion_matrix)
+    print("\n----------------------------------")
+    
     
 
     
