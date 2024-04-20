@@ -132,6 +132,9 @@ def preprocess_unseen_data(scaler, selector):
 
     unseen_refactored = pd.read_csv("dataset/yes_2.csv")
     unseen_non_refactored = pd.read_csv("dataset/no_2.csv")
+
+    unseen_refactored["predictions"] = 1
+    unseen_non_refactored["predictions"] = 0
     
     # drop the columns with all NaN values in them.
     unseen_refactored.dropna(axis=1, how='all', inplace=True)
