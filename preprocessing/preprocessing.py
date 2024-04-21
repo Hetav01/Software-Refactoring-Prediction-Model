@@ -170,8 +170,7 @@ def preprocess_unseen_data(scaler, selector):
     X_unseen = pd.DataFrame(X_unseen, columns=unseen_columns)
     
     # Drop columns not present in the selector.
-    selected_columns = selector.get_support(indices=True)  # Assuming selector supports this method
-    X_unseen = X_unseen.iloc[:, selected_columns]
+    X_unseen = X_unseen[X_unseen.columns[selector.get_support(indices=True)]] # keeping the column names
 
     
     
