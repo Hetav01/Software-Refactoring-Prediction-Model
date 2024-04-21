@@ -167,7 +167,9 @@ def preprocess_unseen_data(scaler, selector):
     X_unseen = scaler.transform(X_unseen)
     
     # Drop columns not present in the selector.
-    X_unseen = X_unseen.iloc[:, selector.get_support(indices= True)]
+    selected_columns = X_unseen.columns[selector.get_support()]
+    X_unseen = X_unseen[selected_columns]
+
     
     return X_unseen.columns.values, X_unseen, y_unseen
 
