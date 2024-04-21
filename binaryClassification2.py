@@ -83,10 +83,10 @@ def _run_single_model(model_def, X, y, X_train, X_test, y_train, y_test):
     test_scores_unseen = evaluate_on_unseen_data(best_estimator, X_unseen, y_unseen)
     
     print("Results for unseen data:")
-    print(test_scores)
-    file2.write("Test Scores:")
+    print(test_scores_unseen)
+    file2.write("Test Scores on unseen data:")
     file2.write("\n")
-    file2.write(str(test_scores))
+    file2.write(str(test_scores_unseen))
     
     file2.write("\n")
     file2.write("\n")
@@ -95,7 +95,8 @@ def _run_single_model(model_def, X, y, X_train, X_test, y_train, y_test):
     file1.close()
     file2.close()
     # return the scores and the best estimator
-    print(test_scores)
+    print(test_scores_unseen)
+    print(best_estimator)
 
 for model in models:
     _run_single_model(model, X, y, X_train, X_test, y_train, y_test)
