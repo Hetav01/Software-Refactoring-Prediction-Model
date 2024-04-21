@@ -163,13 +163,17 @@ def preprocess_unseen_data(scaler, selector):
     X_unseen = unseen_data.drop("predictions", axis=1)
     y_unseen = unseen_data["predictions"]
     
+    unseen_columns = X_unseen.columns
+    
     # Scale the dataset.
     X_unseen = scaler.transform(X_unseen)
+    X_unseen = pd.DataFrame(X_unseen, columns=unseen_columns)
     
     # Drop columns not present in the selector.
-    selected_columns = X_unseen.columns[selector.get_support()]
-    X_unseen = X_unseen[selected_columns]
+    selected_columns = selector.get_support(indices=True)  # Assuming selector supports this method
+    X_unseen = X_unseen.iloc[:, selected_columns]
 
+    
     
     return X_unseen.columns.values, X_unseen, y_unseen
 
