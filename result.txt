@@ -20,3 +20,4 @@ Model Name:ExtraTreesClassifier(random_state=42)
 {'accuracy': [0.99625], 'precision': [0.9947229551451188], 'recall': [0.9973544973544973], 'tn': [420], 'fp': [2], 'fn': [1], 'tp': [377]} Model Name:SVC(shrinking=False)
 Test Scores:{'accuracy': [0.9916176470588235], 'precision': [0.9880744618964514], 'recall': [0.9953120421916203], 'tn': [], 'fp': [], 'fn': [], 'tp': []}
 
+Model Name:SVC(shrinking=False)

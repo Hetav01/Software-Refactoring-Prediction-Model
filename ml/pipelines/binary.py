@@ -10,6 +10,7 @@ from ml.utils.output import format_results_single_run
 from sklearn.metrics import accuracy_score, precision_score, recall_score, confusion_matrix
 from sklearn.model_selection import RandomizedSearchCV, StratifiedKFold, GridSearchCV, train_test_split
 from ml.pipelines.pipelines import MLPipeline
+from ml.utils.cm import fn, fp, tn, tp
 from preprocessing.preprocessing import get_labelled_instances
 from ml.utils.output import format_best_parameters
 from utils.date_utils import now
@@ -75,12 +76,12 @@ def _evaluate_model_for_single_set(search, x_train, x_test, y_train, y_test):
     tp_values = test_scores["tp"]
     
     # Construct the confusion matrix as one whole matrix
-    confusion_matrix = np.array([[tn_values, fp_values],
+    confusion_matrix1 = np.array([[tn_values, fp_values],
                                 [fn_values, tp_values]])
 
     print("------------------------------------\n")
     print("Confusion Matrix:")
-    print(confusion_matrix)
+    print(confusion_matrix1)
     print("\n----------------------------------")
     
     return test_scores, best_estimator
@@ -111,12 +112,12 @@ def evaluate_on_unseen_data(model, X_unseen, y_unseen):
     tp_values = test_scores["tp"]
     
     # Construct the confusion matrix as one whole matrix
-    confusion_matrix = np.array([[tn_values, fp_values],
+    confusion_matrix1 = np.array([[tn_values, fp_values],
                                 [fn_values, tp_values]])
     
     print("------------------------------------\n")
     print("Confusion Matrix:")
-    print(confusion_matrix)
+    print(confusion_matrix1)
     print("\n----------------------------------")
     
     return test_scores
