@@ -80,6 +80,7 @@ def _evaluate_model_for_single_set(search, x_train, x_test, y_train, y_test):
     return test_scores, best_estimator
 
 def evaluate_on_unseen_data(model, X_unseen, y_unseen):
+    print("Unseen started at %s\n" % now())
     test_scores = {'accuracy': [], 'precision': [], 'recall': [], 'tn': [], 'fp': [], 'fn': [], 'tp': []}
     # Predict unseen results for all validation sets
     y_pred_unseen = model.predict(X_unseen)
