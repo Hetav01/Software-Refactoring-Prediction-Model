@@ -35,8 +35,7 @@ print("ML4Refactoring: Binary classification")
 X_columns, X, y, scaler, selector, reduced_cols = get_labelled_instances()
 
 
-#get the training and testing data
-X_columns, X, y = get_labelled_instances()[:3]
+
 X = pd.DataFrame(data= X, columns= X_columns)
 X_train, X_test, y_train, y_test= train_test_split(X, y, test_size= 0.2, random_state= 42)
 
