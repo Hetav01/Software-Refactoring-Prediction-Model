@@ -32,15 +32,14 @@ print("ML4Refactoring: Binary classification")
 # except FileNotFoundError:
 #     print("File not found. Please provide correct file paths.")
 
-X_columns, X, y, scaler, selector= get_labelled_instances()
+X_columns, X, y, scaler, selector, reduced_cols = get_labelled_instances()
 
 
-#get the training and testing data
-X_columns, X, y = get_labelled_instances()[:3]
+
 X = pd.DataFrame(data= X, columns= X_columns)
 X_train, X_test, y_train, y_test= train_test_split(X, y, test_size= 0.2, random_state= 42)
 
-X_unseen_columns, X_unseen, y_unseen = preprocess_unseen_data(scaler, selector)
+X_unseen_columns, X_unseen, y_unseen = preprocess_unseen_data(scaler, selector, reduced_cols)
 
 # Run models
 models = build_models()
