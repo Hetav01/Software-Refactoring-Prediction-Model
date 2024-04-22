@@ -61,6 +61,12 @@ def _evaluate_model_for_single_set(search, x_train, x_test, y_train, y_test):
     print("The accuracy of the model is: ", test_scores["accuracy"], "\n")
     print("The precision of the model is: ", test_scores["precision"], "\n")
     print("The recall of the model is: ", test_scores["recall"], "\n")
+
+    tn, fp, fn, tp = confusion_matrix(y_test, y_pred).ravel()
+    test_scores['tn'].append(tn)
+    test_scores['fp'].append(fp)
+    test_scores['fn'].append(fn)
+    test_scores['tp'].append(tp)
     
     # Get the values from the dictionary
     tn_values = test_scores["tn"]
@@ -91,6 +97,12 @@ def evaluate_on_unseen_data(model, X_unseen, y_unseen):
     print("The accuracy of the model is: ", test_scores["accuracy"], "\n")
     print("The precision of the model is: ", test_scores["precision"], "\n")
     print("The recall of the model is: ", test_scores["recall"], "\n")
+
+    tn, fp, fn, tp = confusion_matrix(y_unseen, y_pred_unseen).ravel()
+    test_scores['tn'].append(tn)
+    test_scores['fp'].append(fp)
+    test_scores['fn'].append(fn)
+    test_scores['tp'].append(tp)
     
     # Get the values from the dictionary
     tn_values = test_scores["tn"]
@@ -101,6 +113,11 @@ def evaluate_on_unseen_data(model, X_unseen, y_unseen):
     # Construct the confusion matrix as one whole matrix
     confusion_matrix = np.array([[tn_values, fp_values],
                                 [fn_values, tp_values]])
+    
+    print("------------------------------------\n")
+    print("Confusion Matrix:")
+    print(confusion_matrix)
+    print("\n----------------------------------")
     
     return test_scores
     
