@@ -120,15 +120,15 @@ def get_labelled_instances(dataset= None, scaler= None, allowed_features= None, 
 
     # Feature reduction
     if is_training_data and FEATURE_REDUCTION and allowed_features is None:
-        X, selector = perform_feature_reduction(X, y)
+        X, selector, reduced_cols = perform_feature_reduction(X, y)
     elif allowed_features is not None:
         drop_list = [c for c in X.columns.values if c not in allowed_features]
         X = X.drop(drop_list, axis=1)
 
     
-    return X.columns.values, X, y, scaler, selector
+    return X.columns.values, X, y, scaler, selector, reduced_cols
 
-def preprocess_unseen_data(scaler, selector):
+def preprocess_unseen_data(scaler, selector, reduced_cols):
 
     unseen_refactored = pd.read_csv("dataset/yes_2.csv")
     unseen_non_refactored = pd.read_csv("dataset/no_2.csv")
@@ -170,9 +170,8 @@ def preprocess_unseen_data(scaler, selector):
     X_unseen = pd.DataFrame(X_unseen, columns=unseen_columns)
     
     # Drop columns not present in the selector.
-    X_unseen = X_unseen[X_unseen.columns[selector.get_support(indices=True)]] # keeping the column names
+    X_unseen = X_unseen[reduced_cols] # keeping the column names
 
-    
     
     return X_unseen.columns.values, X_unseen, y_unseen
 

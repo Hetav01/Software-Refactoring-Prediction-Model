@@ -61,14 +61,15 @@ def perform_feature_reduction(x, y):
 
     # log("Features before reduction (total of {}): {}".format(len(x.columns.values), ', '.join(x.columns.values)))
     selector.fit(x, y)
-    x = x[x.columns[selector.get_support(indices=True)]] # keeping the column names
+    reduced_cols = x.columns[selector.get_support(indices=True)]
+    x = x[reduced_cols] # keeping the column names
+    
 
     # log("Features after reduction (total of {}): {}".format(len(x.columns.values), ', '.join(x.columns.values)))
     # log("Feature ranking: {}".format(', '.join(str(e) for e in selector.ranking_)))
     # log("Feature grid scores: {}".format(', '.join(str(e) for e in selector.grid_scores_)))
 
-    return x, selector
-
+    return x, selector, reduced_cols
 
 def perform_balancing(x, y, strategy=None):
     """
