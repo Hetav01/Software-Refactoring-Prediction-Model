@@ -173,7 +173,6 @@ def preprocess_unseen_data(scaler, selector):
     X_unseen = X_unseen[X_unseen.columns[selector.get_support(indices=True)]] # keeping the column names
 
     
-    
     return X_unseen.columns.values, X_unseen, y_unseen
 
 # get_labelled_instances()
