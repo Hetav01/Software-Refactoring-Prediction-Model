@@ -1,6 +1,8 @@
 import sys
 import os
 import time
+
+# Append current working directory to sys path
 sys.path.append(os.getcwd())
 
 import warnings
@@ -25,27 +27,28 @@ print("ML4Refactoring: Binary classification")
 # refactored_val, non_refactored_val = get_external_dataset()
 # file_path_for_refactored = input("Enter the path of refactored data file: ")
 # file_path_for_non_refactored = input("Enter the path of non-refactored data file: ")
-
 # try:
 #     refactored_val = pd.read_csv(file_path_for_refactored)
 #     non_refactored_val = pd.read_csv(file_path_for_non_refactored)
 # except FileNotFoundError:
 #     print("File not found. Please provide correct file paths.")
 
+# Get labelled instances
 X_columns, X, y, scaler, selector, reduced_cols = get_labelled_instances()
 
-
-
+# Split data into train and test sets
 X = pd.DataFrame(data= X, columns= X_columns)
 X_train, X_test, y_train, y_test= train_test_split(X, y, test_size= 0.2, random_state= 42)
 
+# Preprocess unseen data
 X_unseen_columns, X_unseen, y_unseen = preprocess_unseen_data(scaler, selector, reduced_cols)
 
-# Run models
+# Build models
 models = build_models()
 
-
+# Function to run single model
 def _run_single_model(model_def, X, y, X_train, X_test, y_train, y_test):
+    # Open result file for appending
     file1 = open("result.txt","a")
     # start_time = time.time()
     model = model_def.model()
@@ -53,7 +56,7 @@ def _run_single_model(model_def, X, y, X_train, X_test, y_train, y_test):
     file1.write(str(model))
     file1.write("\n")
 
-    # perform the search for the best hyper parameters
+    # Define hyperparameter search space
     param_dist = model_def.params_to_tune()
     search = None
 
@@ -74,11 +77,13 @@ def _run_single_model(model_def, X, y, X_train, X_test, y_train, y_test):
     # super_model = _build_production_model(model_def, search.best_params_, X, y)
     # end_time = time.time()
     
+    # Open result_unseen file for appending
     file2 = open("result_unseen.txt","a")
     file2.write("Model Name:")
     file2.write(str(model))
     file2.write("\n")
     
+    # Evaluate model on unseen data
     test_scores_unseen = evaluate_on_unseen_data(best_estimator, X_unseen, y_unseen)
     
     print("Results for unseen data:")
@@ -93,10 +98,12 @@ def _run_single_model(model_def, X, y, X_train, X_test, y_train, y_test):
     
     file1.close()
     file2.close()
+
     # return the scores and the best estimator
     print(test_scores_unseen)
     print(best_estimator)
 
+# Loop through models and run them
 for model in models:
     _run_single_model(model, X, y, X_train, X_test, y_train, y_test)
 
