@@ -1,1 +1,27 @@
 Model Name:SVC(shrinking=False)
+Test Scores on unseen data:
+{'accuracy': [0.96145], 'precision': [0.9449426284832707], 'recall': [0.98], 'tn': [9429], 'fp': [571], 'fn': [200], 'tp': [9800]}
+
+Model Name:SVC(shrinking=False)
+Test Scores on unseen data:
+{'accuracy': [0.99635], 'precision': [0.9953098493164355], 'recall': [0.9974], 'tn': [9953], 'fp': [47], 'fn': [26], 'tp': [9974]}
+
+Model Name:DecisionTreeClassifier(random_state=42)
+Test Scores on unseen data:
+{'accuracy': [0.99725], 'precision': [0.9997989747713338], 'recall': [0.9947], 'tn': [9998], 'fp': [2], 'fn': [53], 'tp': [9947]}
+
+Model Name:RandomForestClassifier(random_state=42)
+Test Scores on unseen data:
+{'accuracy': [0.9995], 'precision': [0.9994001199760048], 'recall': [0.9996], 'tn': [9994], 'fp': [6], 'fn': [4], 'tp': [9996]}
+
+Model Name:LogisticRegression()
+Test Scores on unseen data:
+{'accuracy': [0.9583], 'precision': [0.947383834439672], 'recall': [0.9705], 'tn': [9461], 'fp': [539], 'fn': [295], 'tp': [9705]}
+
+Model Name:GaussianNB()
+Test Scores on unseen data:
+{'accuracy': [0.85835], 'precision': [0.7903265008506846], 'recall': [0.9755], 'tn': [7412], 'fp': [2588], 'fn': [245], 'tp': [9755]}
+
+Model Name:ExtraTreesClassifier(random_state=42)
+Test Scores on unseen data:
+{'accuracy': [0.9984], 'precision': [0.9982007197121151], 'recall': [0.9986], 'tn': [9982], 'fp': [18], 'fn': [14], 'tp': [9986]}
