@@ -1,3 +1,4 @@
+# Description: This file is used to test and tweak changes for binary classification
 import sys
 import os
 import time
@@ -21,16 +22,17 @@ from ml.utils.output import format_best_parameters
 
 print("ML4Refactoring: Binary classification")
 
-# Get the data
+# Get labelled data
 X_columns, X, y ,scal, sel= get_labelled_instances()
 
+# Split data in train and test
 X = pd.DataFrame(data= X, columns= X_columns)
-
 X_train, X_test, y_train, y_test= train_test_split(X, y, test_size= 0.2, random_state= 42)
 
-# Run models
+# Build models
 models = build_models()
 
+# List for trained models
 super_models = []
 
 def _run_single_model(model_def, X, y, X_train, X_test, y_train, y_test):
@@ -58,6 +60,7 @@ def _run_single_model(model_def, X, y, X_train, X_test, y_train, y_test):
     
     file1.write("\n")
     file1.write("\n")
+
     # Run cross validation on whole dataset and safe production ready model
     super_model = _build_production_model(model_def, search.best_params_, X, y)
     
@@ -67,8 +70,10 @@ def _run_single_model(model_def, X, y, X_train, X_test, y_train, y_test):
     # return the scores and the best estimator
     print(test_scores)
 
+# Preprocess Unseen Data
 X_cols,X_unseen, y_unseen = preprocess_unseen_data(scal, sel)
 
+# Loop to test models on unssen data
 for model in super_models:
     file1 = open("result_unseen.txt","a")
     file1.write("Model Name:")

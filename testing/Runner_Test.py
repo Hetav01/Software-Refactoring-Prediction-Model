@@ -1,7 +1,7 @@
 # Description: This file is used to run a small simulation of the model training process.
 import sys
 import os
-#sys.path.append(os.getcwd())
+# sys.path.append(os.getcwd())
 
 from preprocessing.preprocessing import get_labelled_instances
 import pandas as pd
